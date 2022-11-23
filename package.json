@@ -1,0 +1,39 @@
+{
+  "name": "env-properties",
+  "version": "0.0.0",
+  "description": "CLI for environment properties generation based on config",
+  "main": "./lib/index.js",
+  "bin": {
+    "env-properties": "./lib/index.js"
+  },
+  "scripts": {
+    "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
+    "build": "tsc -p .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format:fix": "prettier --write 'src/**/*.ts'",
+    "format:check": "prettier --check 'src/**/*.ts'"
+  },
+  "keywords": [
+    "custom-environment-variables",
+    "node-config",
+    "config-generator"
+  ],
+  "author": "jaycorpstudios",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "clear": "^0.1.0",
+    "commander": "^9.4.1",
+    "json5": "^2.2.1",
+    "path": "^0.12.7",
+    "prompts": "^2.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.9",
+    "ajv": "^8.11.2",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.7.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.3"
+  }
+}
