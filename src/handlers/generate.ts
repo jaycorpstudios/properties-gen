@@ -28,7 +28,6 @@ const generate = async (_params, options) => {
 
   try {
     for (const group of configurationGroups) {
-      logger.info(`Generating group: ${group}`)
       const { inputFolder, outputFile, extendsFromBase } = group
 
       const targetEnvironment = getEnvironmentTarget(
@@ -52,6 +51,8 @@ const generate = async (_params, options) => {
         folder: dir,
         filename: name,
       })
+
+      logger.success(`Envionment file generated: ${outputFile}`)
     }
   } catch (error) {
     logger.error(`Error while generating configuration files: ${error}`)

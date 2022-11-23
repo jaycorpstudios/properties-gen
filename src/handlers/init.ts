@@ -4,6 +4,7 @@ import { writeFile } from '../utils/fileSystem'
 import { SupportedFileExtensions } from '../enums/index'
 import { confirmOverwritePrompt, promptOptions } from '../constants/options'
 import { getInitialConfig, isConfigFilePresent } from '../utils/configuration'
+import logger from '../utils/logger'
 
 export default async function initCommand() {
   const [fileName] = configFileName.split('.json')
@@ -24,8 +25,8 @@ export default async function initCommand() {
       folder: './',
       filename: fileName,
     })
-    console.info(`${actionPerformed} Config file`)
+    logger.success(`${actionPerformed} Config file`)
   } else {
-    console.info('Process cancelled')
+    logger.warn('Process cancelled')
   }
 }

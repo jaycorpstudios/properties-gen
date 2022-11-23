@@ -1,17 +1,21 @@
 {
   "name": "env-properties",
-  "version": "0.0.0",
-  "description": "CLI for environment properties generation based on config",
+  "version": "1.0.0-rc.0",
+  "description": "CLI to generate environment properties based on config",
   "main": "./lib/index.js",
   "bin": {
     "env-properties": "./lib/index.js"
   },
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
     "build": "tsc -p .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format:fix": "prettier --write 'src/**/*.ts'",
-    "format:check": "prettier --check 'src/**/*.ts'"
+    "format:check": "prettier --check 'src/**/*.ts'",
+    "prepublish": "npm run build"
   },
   "keywords": [
     "custom-environment-variables",
@@ -22,10 +26,8 @@
   "license": "ISC",
   "dependencies": {
     "chalk": "^4.1.2",
-    "clear": "^0.1.0",
     "commander": "^9.4.1",
     "json5": "^2.2.1",
-    "path": "^0.12.7",
     "prompts": "^2.4.2"
   },
   "devDependencies": {
