@@ -25,6 +25,7 @@
   "author": "jaycorpstudios",
   "license": "ISC",
   "dependencies": {
+    "ajv": "^8.11.2",
     "chalk": "^4.1.2",
     "commander": "^9.4.1",
     "fs.promises": "^0.1.2",
@@ -33,7 +34,6 @@
   },
   "devDependencies": {
     "@types/node": "^18.11.9",
-    "ajv": "^8.11.2",
     "nodemon": "^2.0.20",
     "prettier": "^2.7.1",
     "ts-node": "^10.9.1",
