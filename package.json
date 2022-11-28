@@ -1,6 +1,6 @@
 {
   "name": "properties-gen",
-  "version": "1.0.0-rc.0",
+  "version": "1.0.1-rc.0",
   "description": "CLI to generate environment properties based on config",
   "main": "./lib/index.js",
   "bin": {
