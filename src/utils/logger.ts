@@ -28,4 +28,4 @@ class Logger {
   }
 }
 
-export default new Logger('env-properties')
+export default new Logger('properties-gen')

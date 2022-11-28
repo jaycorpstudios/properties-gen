@@ -1,5 +1,5 @@
 node_modules
 lib/
 example/
-env-properties.config.json
+properties.config.json
 .DS_Store

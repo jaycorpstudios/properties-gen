@@ -1,4 +1,4 @@
-import fs from 'fs/promises'
+import fs from 'fs.promises'
 import path from 'path'
 import JSON5 from 'json5'
 import { SupportedFileExtensions } from '../enums/index'

@@ -14,9 +14,9 @@ program
 
 // generate command optionally takes a file path as argument -f
 program
-  .command('generate [file]', { isDefault: true })
+  .command('generate', { isDefault: true })
   .description('Generates environment properties files')
-  .option('-f, --file [type]', 'Specify configuration file')
+  .option('-f, --file [pathToFile]', 'Specify configuration file')
   .action(generate)
 
 program.parse(process.argv)

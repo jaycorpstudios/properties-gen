@@ -1,4 +1,4 @@
-export const configFileName = 'env-properties.config.json'
+export const configFileName = 'properties.config.json'
 
 export interface DefaultConfigSchema {
   configurationGroups: ConfigurationGroupInterface[]
@@ -9,7 +9,7 @@ export interface DefaultConfigSchema {
 export const defaultConfig: DefaultConfigSchema = {
   configurationGroups: [],
   envTargetKey: 'NODE_ENV',
-  defaultEnvTargetValue: 'development',
+  defaultEnvTargetValue: 'dev',
 }
 
 export interface ConfigurationGroupInterface {

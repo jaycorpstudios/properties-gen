@@ -1,10 +1,10 @@
 {
-  "name": "env-properties",
-  "version": "1.0.0-rc.0",
+  "name": "properties-gen",
+  "version": "0.0.0",
   "description": "CLI to generate environment properties based on config",
   "main": "./lib/index.js",
   "bin": {
-    "env-properties": "./lib/index.js"
+    "properties-gen": "./lib/index.js"
   },
   "files": [
     "lib"
@@ -15,7 +15,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "format:fix": "prettier --write 'src/**/*.ts'",
     "format:check": "prettier --check 'src/**/*.ts'",
-    "prepublish": "npm run build"
+    "prepare": "npm run build"
   },
   "keywords": [
     "custom-environment-variables",
@@ -27,6 +27,7 @@
   "dependencies": {
     "chalk": "^4.1.2",
     "commander": "^9.4.1",
+    "fs.promises": "^0.1.2",
     "json5": "^2.2.1",
     "prompts": "^2.4.2"
   },

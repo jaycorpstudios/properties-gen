@@ -23,7 +23,7 @@ const generate = async (_params, options) => {
   const {
     configurationGroups = [],
     envTargetKey = 'NODE_ENV',
-    defaultEnvTargetValue = 'development',
+    defaultEnvTargetValue = 'dev',
   } = config
 
   try {
