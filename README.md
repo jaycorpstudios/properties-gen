@@ -112,3 +112,19 @@ module.exports = {
 ```
 
 _Tip:_ use `npx properties-gen init` to create the configuration file, then install properties-gen as a development dependency in your project and finally chain the `properties-gen generate` command before the `start`|`dev`|`build` command, so properties are generated before running the project.
+
+
+Package script defintion example using NextJs
+`package.json`
+```json
+{
+  "name": "myApp",
+  "scripts": {
+    "gen-config": "properties-gen generate",
+    "dev": "npm run gen-config && next dev",
+    "build": "npm run gen-config && next build",
+    "start": "next start",
+  }
+}
+
+```
