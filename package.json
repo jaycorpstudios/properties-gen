@@ -20,7 +20,10 @@
   "keywords": [
     "custom-environment-variables",
     "node-config",
-    "config-generator"
+    "config-generator",
+    "cli",
+    "configuration",
+    "properties"
   ],
   "author": "jaycorpstudios",
   "license": "ISC",

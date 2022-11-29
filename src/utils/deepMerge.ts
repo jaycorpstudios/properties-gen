@@ -1,16 +1,24 @@
 export type AnyObject = { [key: string]: any }
 
-const deepMerge = (target: AnyObject = {}, source: AnyObject = {}) => {
-  const keys = Object.keys(source)
+const deepMerge = (base: AnyObject = {}, extension: AnyObject = {}) => {
+  const keys = Object.keys(base)
+  const merged = { ...base, ...extension }
   for (const key of keys) {
-    let current = source[key]
-    if (current instanceof Object) {
-      current = target[key]
-        ? { ...current, ...deepMerge(target[key], current) }
+    const current = base[key]
+    const isArray = Array.isArray(current)
+    const isObject = current instanceof Object && !isArray
+    // Extend arrays
+    if (isArray) {
+      merged[key] = [...current, ...(extension[key] || [])]
+    }
+    // Extend objects
+    if (isObject) {
+      merged[key] = extension[key]
+        ? { ...deepMerge(current, extension[key]) }
         : current
     }
   }
-  return { ...target, ...source }
+  return merged
 }
 
 export default deepMerge
