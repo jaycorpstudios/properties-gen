@@ -35,12 +35,16 @@ This will create a `properties.config.json` file in your root directory, notice 
     {
       "inputFolder": "config/server/",
       "outputFile": "environment/env.server.js",
-      "extendsFromBase": true
+      "extendsFromBase": true,
+      "inputFileNamePattern": "env.{{envTargetKey}}.json",
+      "fileBaseName": "base.json"
     },
     {
       "inputFolder": "config/client/",
       "outputFile": "environment/env.client.js",
-      "extendsFromBase": true
+      "extendsFromBase": true,
+      "inputFileNamePattern": "env.{{envTargetKey}}.json",
+      "fileBaseName": "base.json"
     }
   ],
   "envTargetKey": "NODE_ENV",

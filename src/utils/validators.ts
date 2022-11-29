@@ -1,7 +1,11 @@
 import Ajv, { JSONSchemaType } from 'ajv'
 import { DefaultConfigSchema } from '../constants/configSchema'
 
-const ajv = new Ajv()
+const ajv = new Ajv({ allErrors: true })
+ajv.addFormat('fileFormat', {
+  type: 'string',
+  validate: (data) => /.*\.(js|json)$/.test(data),
+})
 
 const schema: JSONSchemaType<DefaultConfigSchema> = {
   type: 'object',
@@ -14,8 +18,14 @@ const schema: JSONSchemaType<DefaultConfigSchema> = {
         type: 'object',
         properties: {
           inputFolder: { type: 'string' },
-          outputFile: { type: 'string' },
+          outputFile: { type: 'string', format: 'fileFormat' },
           extendsFromBase: { type: 'boolean' },
+          inputFileNamePattern: {
+            type: 'string',
+            format: 'fileFormat',
+            nullable: true,
+          },
+          fileBaseName: { type: 'string', nullable: true },
         },
         required: ['inputFolder', 'outputFile', 'extendsFromBase'],
         additionalProperties: false,

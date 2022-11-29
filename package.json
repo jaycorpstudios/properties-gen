@@ -29,6 +29,7 @@
   "license": "ISC",
   "dependencies": {
     "ajv": "^8.11.2",
+    "ajv-formats": "^2.1.1",
     "chalk": "^4.1.2",
     "commander": "^9.4.1",
     "fs.promises": "^0.1.2",

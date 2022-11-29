@@ -36,3 +36,12 @@ export const loadJsonFile = async <T>(filePath: string): Promise<T> => {
   const file = await fs.readFile(path.resolve(filePath), { encoding: 'utf8' })
   return JSON.parse(file) as T
 }
+
+export const loadFile = async <T>(
+  filePath,
+  extension: SupportedFileExtensions
+) => {
+  const loader =
+    extension === SupportedFileExtensions.JSON ? loadJsonFile : require
+  return loader(filePath) as T
+}

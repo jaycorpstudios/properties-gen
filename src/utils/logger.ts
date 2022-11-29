@@ -2,7 +2,7 @@ import chalk from 'chalk'
 
 class Logger {
   prefix: string
-  
+
   constructor(prefix: string) {
     this.prefix = prefix
   }

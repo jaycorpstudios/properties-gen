@@ -1,9 +1,10 @@
 import path from 'path'
 import deepMerge, { AnyObject } from './deepMerge'
-import { loadJsonFile } from './fileSystem'
+import { loadFile, loadJsonFile } from './fileSystem'
 import { isPrimitive, isArray } from './common'
+import { SupportedFileExtensions } from '../enums'
 
-export const getEnvironmentTarget = (
+export const getEnvironmentTargetKey = (
   envTargetKey: string,
   defaultEnvTargetValue: string
 ): string => {
@@ -16,12 +17,12 @@ export const getEnvironmentTarget = (
   return value || defaultEnvTargetValue
 }
 
-const parseEnvValue = (value) => {
+export const parseEnvValue = (key, value: string | undefined = undefined) => {
   const regex = new RegExp(/{{(.*)}}/)
-  const shouldParse = typeof value === 'string' && regex.test(value)
-  const [pattern = '', patternKey] = regex.exec(value) || []
-  const patternValue = process.env[patternKey] || ''
-  return shouldParse ? value.replace(pattern, patternValue) : value
+  const shouldParse = typeof key === 'string' && regex.test(key)
+  const [pattern = '', patternKey] = regex.exec(key) || []
+  const patternValue = value || process.env[patternKey] || ''
+  return shouldParse ? key.replace(pattern, patternValue) : key
 }
 
 const injectEnvValues = (data: AnyObject) => {
@@ -39,16 +40,42 @@ const injectEnvValues = (data: AnyObject) => {
   return data
 }
 
-export const getEnvironmentGroup = async (
-  inputFolder: string,
-  extendsFromBase: boolean,
-  targetEnvironment: string
-): Promise<AnyObject> => {
-  const env = await loadJsonFile<AnyObject>(
-    path.resolve(inputFolder, `env.${targetEnvironment}.json`)
+interface getEnvironmentGroupParams {
+  inputFolder: string
+  extendsFromBase: boolean
+  targetEnvironmentKey: string
+  inputFileNamePattern: string
+  fileBaseName: string
+}
+
+export const getEnvironmentGroup = async ({
+  inputFolder,
+  extendsFromBase,
+  targetEnvironmentKey,
+  inputFileNamePattern,
+  fileBaseName,
+}: getEnvironmentGroupParams): Promise<AnyObject> => {
+  const inputFileExtension = inputFileNamePattern
+    .split('.')
+    .pop() as SupportedFileExtensions
+  const inputFileBaseExtension = fileBaseName
+    .split('.')
+    .pop() as SupportedFileExtensions
+  const parsedInputFileName = parseEnvValue(
+    inputFileNamePattern,
+    targetEnvironmentKey
   )
+
+  const env = await loadFile<AnyObject>(
+    path.resolve(inputFolder, parsedInputFileName),
+    inputFileExtension
+  )
+
   const base = extendsFromBase
-    ? await loadJsonFile<AnyObject>(path.resolve(inputFolder, `base.json`))
+    ? await loadFile<AnyObject>(
+        path.resolve(inputFolder, fileBaseName),
+        inputFileBaseExtension
+      )
     : {}
 
   const mergedData = deepMerge(base, env)

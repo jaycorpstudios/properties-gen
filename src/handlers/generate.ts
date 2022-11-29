@@ -1,17 +1,26 @@
 import path from 'path'
 import { exit } from 'process'
-import { configFileName, DefaultConfigSchema } from '../constants/configSchema'
+import {
+  configFileName,
+  DefaultConfigSchema,
+  fileBaseNameDefault,
+  inputFileNamePatternDefault,
+} from '../constants/configSchema'
 import { SupportedFileExtensions } from '../enums/index'
 import { loadJsonFile, writeFile } from '../utils/fileSystem'
 import logger from '../utils/logger'
 import { validateConfigSchema } from '../utils/validators'
-import { getEnvironmentGroup, getEnvironmentTarget } from '../utils/environment'
+import {
+  getEnvironmentGroup,
+  getEnvironmentTargetKey,
+} from '../utils/environment'
 
 const generate = async (_params, options) => {
   // read the config file
-  const filePath = options.file || configFileName
-  const config = await loadJsonFile<DefaultConfigSchema>(filePath)
+  const confgFilePath = options.file || configFileName
+  const config = await loadJsonFile<DefaultConfigSchema>(confgFilePath)
   const { isValid, errors } = validateConfigSchema(config)
+
   if (!isValid) {
     for (const error of errors) {
       const { instancePath, message } = error
@@ -28,18 +37,26 @@ const generate = async (_params, options) => {
 
   try {
     for (const group of configurationGroups) {
-      const { inputFolder, outputFile, extendsFromBase } = group
+      const {
+        inputFolder,
+        outputFile,
+        extendsFromBase,
+        inputFileNamePattern = inputFileNamePatternDefault,
+        fileBaseName = fileBaseNameDefault,
+      } = group
 
-      const targetEnvironment = getEnvironmentTarget(
+      const targetEnvironmentKey = getEnvironmentTargetKey(
         envTargetKey,
         defaultEnvTargetValue
       )
 
-      const fileContent = await getEnvironmentGroup(
+      const fileContent = await getEnvironmentGroup({
         inputFolder,
         extendsFromBase,
-        targetEnvironment
-      )
+        targetEnvironmentKey,
+        inputFileNamePattern,
+        fileBaseName,
+      })
 
       // extract path, filename and extension from the output file
       const { dir, name, ext } = path.parse(outputFile)
