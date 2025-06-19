@@ -4,12 +4,14 @@ export interface DefaultConfigSchema {
   configurationGroups: ConfigurationGroupInterface[]
   envTargetKey?: string
   defaultEnvTargetValue?: string
+  useEsModule?: boolean
 }
 
 export const defaultConfig: DefaultConfigSchema = {
   configurationGroups: [],
   envTargetKey: 'NODE_ENV',
   defaultEnvTargetValue: 'dev',
+  useEsModule: false,
 }
 
 export interface ConfigurationGroupInterface {

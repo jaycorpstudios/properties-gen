@@ -33,6 +33,7 @@ const generate = async (_params, options) => {
     configurationGroups = [],
     envTargetKey = 'NODE_ENV',
     defaultEnvTargetValue = 'dev',
+    useEsModule = false,
   } = config
 
   try {
@@ -67,6 +68,7 @@ const generate = async (_params, options) => {
         extension,
         folder: dir,
         filename: name,
+        useEsModule,
       })
 
       logger.success(`Envionment file generated: ${outputFile}`)

@@ -90,6 +90,7 @@ This will create a `properties.config.json` file in your root directory, notice 
     }
   ],
   "envTargetKey": "NODE_ENV",
+  "useEsModule": true,
   "defaultEnvTargetValue": "dev"
 }
 ```
@@ -98,6 +99,7 @@ This will create a `properties.config.json` file in your root directory, notice 
 |---|---|---|
 | envTargetKey | `{String}` | default:  `NODE_ENV` Environment variable key which dictates the environment file to process. (e.g.) `COUNTRY`, `TENANT` |
 | defaultEnvTargetValue | `{String}` | default: `dev` Fallback value for envTargetKey key. (e.g. `NODE_ENV=dev`) |
+| useEsModule | `{Boolean}` | default: `true` When true, the output file will be an ES module, otherwise it will be a CommonJS module. |
 | configurationGroups | `Array of {configurationGroup}` |  |
 | configurationGroup.inputFolder | `{String}` | default: `config/server/` Folder where configuration files are located |
 | configurationGroup.inputFileNamePattern | `{String}` | default: `env.{{envTargetKey}}.json` The name pattern for the input files, notice you must include `{{envTargetKey}}` in order to dynamically pick the right one when running the generate command. |

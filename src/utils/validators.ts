@@ -33,6 +33,7 @@ const schema: JSONSchemaType<DefaultConfigSchema> = {
     },
     envTargetKey: { type: 'string', nullable: true },
     defaultEnvTargetValue: { type: 'string', nullable: true },
+    useEsModule: { type: 'boolean', nullable: true },
   },
   required: ['configurationGroups'],
   additionalProperties: false,

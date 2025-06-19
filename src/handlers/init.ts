@@ -24,6 +24,7 @@ export default async function initCommand() {
       extension: SupportedFileExtensions.JSON,
       folder: './',
       filename: fileName,
+      useEsModule: options.useEsModule || false,
     })
     logger.success(`${actionPerformed} Config file`)
   } else {

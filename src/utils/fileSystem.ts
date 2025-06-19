@@ -8,6 +8,7 @@ interface WriteFileOptions {
   extension: SupportedFileExtensions
   folder: string
   filename: string
+  useEsModule: boolean
 }
 
 export const writeFile = async ({
@@ -15,20 +16,22 @@ export const writeFile = async ({
   extension,
   folder,
   filename,
+  useEsModule = false
 }: WriteFileOptions) => {
-  const parsedData = stringifyData(data, extension)
+  const parsedData = stringifyData(data, extension, { useEsModule })
   const folderPath = path.resolve(folder)
   const filePath = `${folder}/${filename}.${extension}`
   await fs.mkdir(folderPath, { recursive: true })
   return await fs.writeFile(filePath, parsedData)
 }
 
-const stringifyData = (data: any, extension: SupportedFileExtensions) => {
+const stringifyData = (data: any, extension: SupportedFileExtensions, options: { useEsModule: boolean }) => {
   const isJson = extension === SupportedFileExtensions.JSON
   const body = isJson ? JSON.stringify(data, null, 2) : data
+  const fileExportPrefix = options.useEsModule ? 'export default ' : 'module.exports = '
   const parsedData = isJson
     ? body
-    : 'module.exports = ' + JSON5.stringify(data, { space: 2 })
+    : fileExportPrefix + JSON5.stringify(data, { space: 2 })
   return parsedData
 }
 
